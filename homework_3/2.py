@@ -1,4 +1,4 @@
-def polyndrom(s):
+def palyndrom(s):
     s = s.split()
     s = ''.join(s)
     i = len(s) // 2
@@ -18,5 +18,5 @@ def polyndrom(s):
             print('False')
 
 
-s = input()
-polyndrom(s)
+s = input('Введите строку или число:\n')
+palyndrom(s)
