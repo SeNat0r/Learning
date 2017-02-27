@@ -6,7 +6,7 @@ def sort(x):
             tmp = n
             # print('tmp', tmp)
     return tmp
-lst = [1, 2, 3, 8, 5, 999, -16, 55, 0 ]
+lst = [1, 2, 3, 8, 5, 999, -16, 55, 0]
 lst2 = []
 while len(lst) > 0:
     print(sort(lst))
