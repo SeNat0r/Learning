@@ -31,17 +31,24 @@ elif zadacha == 3:
     print('Введите координаты точки C')
     xc = int(input('x: '))
     yc = int(input('y: '))
-    if xa == xb == xc or ya == yb == yc:
-        print('Это не треугольник!')
-    elif (xa == xb and ya == yb) or (xa == xc and ya == yc) or (xc == xb and yc == yb):
-        print('Я в ответах ограничен, задавай правильные координаты...')
+    # if xa == xb == xc or ya == yb == yc:
+    #     print('Это не треугольник!')
+    # elif (xa == xb and ya == yb) or (xa == xc and ya == yc) or (xc == xb and yc == yb):
+    #     print('Я в ответах ограничен, задавай правильные координаты...')
+    # else:
+    #     if xa == xb or xa == xc or xb == xc:
+    #         if ya == yb or ya == yc or yb == yc:
+    #             print('Это правильный треугольник!')
+    #         else:
+    #             print('Это не правильный треугольник')
+    #     else:
+    #         print('Это не правильный треугольник')
+    ab = ((xa - xb) ** 2) + ((ya - yb) ** 2)
+    ac = ((xa - xc) ** 2) + ((ya - yc) ** 2)
+    bc = ((xb - xc) ** 2) + ((yb - yc) ** 2)
+    if (ab + ac) == bc or (ab + bc) == ac or (ac + bc) == ab:
+        print('Это прямоугольный треугольник')
     else:
-        if xa == xb or xa == xc or xb == xc:
-            if ya == yb or ya == yc or yb == yc:
-                print('Это правильный треугольник!')
-            else:
-                print('Это не правильный треугольник')
-        else:
-            print('Это не правильный треугольник')
+        print('Это не прямоугольный треугольник')
 else:
     print("Нет такого номера задачи!")
