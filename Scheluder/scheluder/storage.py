@@ -26,6 +26,7 @@ def connect(db_name=None):
     conn.row_factory = dict_factory
     return conn
 
+
 # Инициализация базы
 def initialize(conn):
     with conn:
@@ -45,4 +46,16 @@ def add_task(conn, tsk_nm, tsk_dt, text):
     cursor = conn.execute('''
         INSERT INTO scheluder (task_name, task_date, text) VALUES (?,?,?)
     ''', (tsk_nm, tsk_dt, text))
+    conn.commit()
 
+
+def update_task(conn, tsk_nm, tsk_dt, text, ident):
+    cursor = conn.execute('''
+        UPDATE scheluder SET (task_name=?, task_date=?, text=?) WHERE id=?
+    ''', (tsk_nm, tsk_dt, text, ident))
+    conn.commit()
+
+def find_all(conn):
+    with conn:
+        cursor = conn.execute(SQL_SELECT)
+        return cursor.fetchall
