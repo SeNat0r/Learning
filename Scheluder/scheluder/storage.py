@@ -1,20 +1,5 @@
 import sqlite3
 
-SQL_SELECT = '''
-    SELECT
-        id, task_name, task_date, text, status
-    FROM
-        scheluder
-'''
-
-
-# Вывод значений из базы в списке (а не в кортеже)
-def dict_factory(cursor, row):
-    d = {}
-    for i, col in enumerate(cursor.description):
-        d[col[0]] = row[i]
-    return d
-
 
 # Подключение(создание) к базе данных
 def connect(db_name=None):
@@ -23,7 +8,6 @@ def connect(db_name=None):
         db_name = ':memory:'
 
     conn = sqlite3.connect(db_name)
-    conn.row_factory = dict_factory
     return conn
 
 
@@ -55,7 +39,12 @@ def update_task(conn, tsk_nm, tsk_dt, text, ident):
     ''', (tsk_nm, tsk_dt, text, ident))
     conn.commit()
 
-def find_all(conn):
-    with conn:
-        cursor = conn.execute(SQL_SELECT)
-        return cursor.fetchall
+
+
+def all_tasks(conn):
+    for row in conn.execute('''SELECT * FROM scheluder'''):
+        if row[4] == 0:
+            status = 'Не выполнено'
+        else:
+            status = 'Выполнено'
+        print('{0[0]}   {0[1]}   {0[2]}   {0[3]}    {1}'.format(row, status))
