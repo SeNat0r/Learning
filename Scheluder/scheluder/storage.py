@@ -24,6 +24,7 @@ def connect(db_name=None):
 
     conn = sqlite3.connect(db_name)
     conn.row_factory = dict_factory
+    return conn
 
 # Инициализация базы
 def initialize(conn):
@@ -37,3 +38,11 @@ def initialize(conn):
                 status INTEGER NOT NULL DEFAULT 0
             )
         ''')
+
+
+# Добавление задачи к базе данных
+def add_task(conn, tsk_nm, tsk_dt, text):
+    cursor = conn.execute('''
+        INSERT INTO scheluder (task_name, task_date, text) VALUES (?,?,?)
+    ''', (tsk_nm, tsk_dt, text))
+
