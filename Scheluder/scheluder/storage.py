@@ -39,7 +39,17 @@ def update_task(conn, tsk_nm, tsk_dt, text, ident):
     ''', (tsk_nm, tsk_dt, text, ident))
     conn.commit()
 
+def re_task(conn, ident):
+    cursor = conn.execute('''
+            UPDATE scheluder SET status=0 WHERE id=?
+        ''', ident)
+    conn.commit()
 
+def close_task(conn, ident):
+    cursor = conn.execute('''
+            UPDATE scheluder SET status=1 WHERE id=?
+        ''', ident)
+    conn.commit()
 
 def all_tasks(conn):
     for row in conn.execute('''SELECT * FROM scheluder'''):
