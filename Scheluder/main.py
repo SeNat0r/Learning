@@ -2,7 +2,7 @@ import sys
 from scheluder import storage
 
 # Подключение к базе
-conn = storage.connect()
+conn = storage.connect('tasks.db')
 storage.initialize(conn)
 
 #Функция показа меню
