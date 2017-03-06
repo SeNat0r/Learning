@@ -58,17 +58,17 @@ def update_task(conn, task_name, task_date, text, idx):
 
 
 def re_task(conn, idx):
-    cursor = conn.execute('''
-            UPDATE scheluder SET status=0 WHERE id=?
-        ''', idx)
-    conn.commit()
+    with conn:
+        cursor = conn.execute('''
+                UPDATE scheluder SET status='Не выполнено' WHERE id=?
+            ''', idx)
 
 
 def close_task(conn, idx):
-    cursor = conn.execute('''
-            UPDATE scheluder SET status=1 WHERE id=?
-        ''', idx)
-    conn.commit()
+    with conn:
+        cursor = conn.execute('''
+                UPDATE scheluder SET status='Выполнено' WHERE id=?
+            ''', idx)
 
 
 def all_tasks(conn):

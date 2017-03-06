@@ -23,6 +23,7 @@ q. Выход
 
 # Выход
 def action_exit():
+    conn.close()
     sys.exit(0)
 
 
@@ -32,6 +33,7 @@ def action_add_task():
     task_date = input('Дата выполнения:\n')
     text = input('Текст задачи:\n')
     storage.add_task(conn, task_name, task_date, text)
+
 
 # Вывод всех задач
 def action_all_tasks():
@@ -50,6 +52,7 @@ def action_re_task():
     storage.re_task(conn, act)
 
 
+# Редактирование задачи
 def action_update_task():
     idx = input('id задачи: \n')
     task = storage.find_by_id(conn, idx)
@@ -59,22 +62,24 @@ def action_update_task():
     text = input('Текст задачи:\n')
     storage.update_task(conn, task_name, task_date, text, idx)
 
+
+actions = {
+    '1': action_all_tasks,
+    '2': action_add_task,
+    '3': action_update_task,
+    '4': action_close_task,
+    '5': action_re_task,
+    'm': action_show_menu,
+    'q': action_exit
+}
+
 if __name__ == '__main__':
     action_show_menu()
 
-while True:
-    cmd = input('\nВведите команду: ')
-    if cmd == '1':
-        action_all_tasks()
-    elif cmd == '2':
-        action_add_task()
-    elif cmd == '3':
-        action_update_task()
-    elif cmd == '4':
-        action_close_task()
-    elif cmd == '5':
-        action_re_task()
-    elif cmd == 'q':
-        action_exit()
-    elif cmd == 'm':
-        action_show_menu()
+    while True:
+        cmd = input('\nВведите команду: ')
+        action = actions.get(cmd)
+        if action:
+            action()
+        else:
+            print('Неизвестная команда')
