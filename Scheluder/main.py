@@ -52,6 +52,8 @@ def action_re_task():
 
 def action_update_task():
     idx = input('id задачи: \n')
+    task = storage.find_by_id(conn, idx)
+    print('{task[task_name]}   {task[task_date]} {task[text]}'.format(task=task))
     task_name = input('Название задачи:\n')
     task_date = input('Дата выполнения:\n')
     text = input('Текст задачи:\n')

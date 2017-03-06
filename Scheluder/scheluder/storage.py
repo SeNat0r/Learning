@@ -44,6 +44,12 @@ def add_task(conn, task_name, task_date, text):
         ''', (task_name, task_date, text))
 
 
+def find_by_id(conn, idx):
+    with conn:
+        cursor = conn.execute(SQL_SELECT + ''' WHERE id=?''', (idx,))
+        return cursor.fetchone()
+
+
 def update_task(conn, task_name, task_date, text, idx):
     with conn:
         cursor = conn.execute('''
