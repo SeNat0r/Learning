@@ -1,5 +1,6 @@
 import sqlite3
 
+
 SQL_SELECT = '''SELECT id, task_name, task_date, text, status FROM scheluder'''
 
 
@@ -62,7 +63,7 @@ def re_task(conn, idx):
         cursor = conn.execute('''
                 UPDATE scheluder SET status='Не выполнено' WHERE id=?
             ''', idx)
-
+        return
 
 def close_task(conn, idx):
     with conn:
