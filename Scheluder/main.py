@@ -39,7 +39,11 @@ def action_add_task():
 def action_all_tasks():
     all_tasks = storage.all_tasks(conn)
     for task in all_tasks:
-        print('{task[id]}.   {task[task_name]}   {task[task_date]} - {task[status]}'.format(task=task))
+        print('{:*^101}'.format(' id: {task[id]} '.format(task=task)),\
+              '\nНазвание задачи: {task[task_name]} Дата: {task[task_date]} Статус: {task[status]}'.format(task=task),\
+              '\n{:=^101}'.format(' Текст задачи '), '\n{task[text]}'.format(task=task), \
+              '\n{:=^101}\n'.format(' Текст задачи '))
+    idx = input('\n')
 
 
 def action_close_task():
@@ -54,11 +58,11 @@ def action_re_task():
 
 # Редактирование задачи
 def action_update_task():
-    idx = input('id задачи: \n')
+    idx = input('\nid задачи: ')
     task = storage.find_by_id(conn, idx)
     print('{task[task_name]}   {task[task_date]} {task[text]}'.format(task=task))
-    task_name = input('Название задачи:\n')
-    task_date = input('Дата выполнения:\n')
+    task_name = input('\nНазвание задачи:')
+    task_date = input('\nДата выполнения:')
     text = input('Текст задачи:\n')
     storage.update_task(conn, task_name, task_date, text, idx)
 
