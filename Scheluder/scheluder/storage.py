@@ -44,24 +44,24 @@ def add_task(conn, task_name, task_date, text):
         ''', (task_name, task_date, text))
 
 
-def update_task(conn, tsk_nm, tsk_dt, text, ident):
-    cursor = conn.execute('''
-        UPDATE scheluder SET task_name=?, task_date=?, text=? WHERE id=?
-    ''', (tsk_nm, tsk_dt, text, ident))
-    conn.commit()
+def update_task(conn, task_name, task_date, text, idx):
+    with conn:
+        cursor = conn.execute('''
+            UPDATE scheluder SET task_name=?, task_date=?, text=? WHERE id=?
+        ''', (task_name, task_date, text, idx))
 
 
-def re_task(conn, ident):
+def re_task(conn, idx):
     cursor = conn.execute('''
             UPDATE scheluder SET status=0 WHERE id=?
-        ''', ident)
+        ''', idx)
     conn.commit()
 
 
-def close_task(conn, ident):
+def close_task(conn, idx):
     cursor = conn.execute('''
             UPDATE scheluder SET status=1 WHERE id=?
-        ''', ident)
+        ''', idx)
     conn.commit()
 
 
