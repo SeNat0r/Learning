@@ -28,32 +28,34 @@ def action_exit():
 
 # Добавление задачи
 def action_add_task():
-    tsk_nm = input('Название задачи:\n')
+    task_name = input('Название задачи:\n')
     task_date = input('Дата выполнения:\n')
     text = input('Текст задачи:\n')
-    storage.add_task(conn, tsk_nm, task_date, text)
+    storage.add_task(conn, task_name, task_date, text)
 
-
+# Вывод всех задач
 def action_all_tasks():
-    storage.all_tasks(conn)
+    all_tasks = storage.all_tasks(conn)
+    for task in all_tasks:
+        print('{task[id]}.   {task[task_name]}   {task[task_date]} - {task[status]}'.format(task=task))
 
 
 def action_close_task():
     act = input('id: ')
-    storage.close_task(conn,act)
+    storage.close_task(conn, act)
 
 
 def action_re_task():
     act = input('id: ')
-    storage.re_task(conn,act)
+    storage.re_task(conn, act)
 
 
 def action_update_task():
-    ident = input('id задачи: \n')
-    tsk_nm = input('Название задачи:\n')
+    idx = input('id задачи: \n')
+    task_name = input('Название задачи:\n')
     task_date = input('Дата выполнения:\n')
     text = input('Текст задачи:\n')
-    storage.update_task(conn, tsk_nm, task_date, text, ident)
+    storage.update_task(conn, task_name, task_date, text, idx)
 
 if __name__ == '__main__':
     action_show_menu()

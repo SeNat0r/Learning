@@ -66,9 +66,6 @@ def close_task(conn, idx):
 
 
 def all_tasks(conn):
-    for row in conn.execute('''SELECT * FROM scheluder'''):
-        if row[4] == 0:
-            status = 'Не выполнено'
-        else:
-            status = 'Выполнено'
-        print('{0[0]}   {0[1]}   {0[2]}   {0[3]}    {1}'.format(row, status))
+    with conn:
+        cursor = conn.execute(SQL_SELECT)
+        return cursor.fetchall()
