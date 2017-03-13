@@ -18,6 +18,6 @@ class Field(object):
         self.width = 10
 
 
-class event_sheet(Player, Ship):
+class EventSheet(Player, Ship):
     def attack(self, point):
         pass
