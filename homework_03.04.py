@@ -16,17 +16,6 @@ class LinkedLIst(object):
             print(node.data)
             node = node.next_node
 
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.i < self.size:
-            i = self.i
-            self.i += 1
-            return i
-        else:
-            raise StopIteration()
-
     def __getitem__(self, item):
         i = 0
         node = self.root
@@ -49,6 +38,17 @@ class LinkedLIst(object):
             raise IndexError('index out of range')
         node.data = value
 
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.i == self.size:
+            raise StopIteration
+        else:
+            i = self.i
+            self.i += 1
+            return self[i]
+
     def __len__(self):
         return self.size
 
@@ -64,9 +64,12 @@ l.add(10)
 l.add('42')
 l.add('ололо')
 # print(len(l))
-# a = iter(l)
-# print(next(a))
-# print(next(a))
-# print(next(a))
-print(l[0])
+# print(l[3])
+#
+# for m in l:
+#     print(m)
+
+
+
+
 
