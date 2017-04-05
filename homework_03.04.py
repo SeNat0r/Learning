@@ -168,5 +168,5 @@ t.add('проверка2')
 
 new = l + t
 # new.show()
-# for m in l:
-#     print(m)
+for m in l:
+    print(m)
