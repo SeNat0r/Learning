@@ -84,6 +84,22 @@ class LinkedLIst(object):
             self.root = new_node
         self.size += 1
 
+    def insert(self, d, i):
+        idx = 1
+        node = self.root
+        if i <= self.size and i != 0:
+            while idx != i:
+                idx += 1
+                node = node.next_node
+            new_node = Node(d, node.next_node)
+            node.next_node = new_node
+            self.size += 1
+        elif i == 0:
+            new_node = Node(d, self.root)
+            self.root = new_node
+            self.size += 1
+        else:
+            raise IndexError('index out of range')
 
 
 class DLNode(object):
@@ -150,14 +166,16 @@ class DoubleLinkedLIst(object):
         return self.size
 
     def __add__(self, other):
-        new_list = self
+        new_list = DoubleLinkedLIst()
+        for a in self:
+            new_list.add(a)
         for b in other:
             new_list.add(b)
         return new_list
 
     def add(self, d):
         node = self.last
-        new_node = DLNode(d, p=node )
+        new_node = DLNode(d, p=node)
         if node:
             node.next_node = new_node
         self.last = new_node
@@ -166,7 +184,7 @@ class DoubleLinkedLIst(object):
         self.size += 1
 
 
-l = DoubleLinkedLIst()
+l = LinkedLIst()
 l.add(3)
 l.add(10)
 l.add('42')
@@ -176,12 +194,13 @@ l.add('ололо')
 # print(l[1])
 
 # print('ололо' in l)
-
+#
 # t = LinkedLIst()
 # t.add('проверка1')
 # t.add('проверка2')
 
 # new = l + t
 # l.show()
-# for m in l:
-#     print(m)
+l.insert('добавление', 4)
+for m in l:
+    print(m)
