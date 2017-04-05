@@ -95,7 +95,8 @@ class DLNode(object):
 
 class DoubleLinkedLIst(object):
     def __init__(self, r=None):
-        self.root = r
+        self.last = r
+        self.root = None
         self.size = 0
         self.i = 0
 
@@ -139,7 +140,7 @@ class DoubleLinkedLIst(object):
             return self[i]
 
     def __contains__(self, item):
-        node = self.root
+        node = self.last
         while node:
             if node.data == item:
                 return True
@@ -155,16 +156,17 @@ class DoubleLinkedLIst(object):
         return new_list
 
     def add(self, d):
-        new_node = DLNode(d, self.root)
-        if self.root:
-            self.root.prev_node = new_node
-        self.root = new_node
+        node = self.last
+        new_node = DLNode(d, p=node )
+        if node:
+            node.next_node = new_node
+        self.last = new_node
+        if self.size == 0:
+            self.root = new_node
         self.size += 1
-        new_node.idx = self.i
-        self.i += 1
 
 
-l = LinkedLIst()
+l = DoubleLinkedLIst()
 l.add(3)
 l.add(10)
 l.add('42')
