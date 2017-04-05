@@ -68,10 +68,18 @@ class LinkedLIst(object):
             new_list.add(b)
         return new_list
 
+    # def add(self, d):
+    #     new_node = Node(d, self.root)
+    #     self.root = new_node
+    #     self.size += 1
+
     def add(self, d):
-        new_node = Node(d, self.root)
+        node = self.root
+        new_node = Node(d)
+        node.next_node = new_node
         self.root = new_node
         self.size += 1
+
 
 
 class DLNode(object):
@@ -162,11 +170,11 @@ l.add('ололо')
 
 # print('ололо' in l)
 
-t = LinkedLIst()
-t.add('проверка1')
-t.add('проверка2')
+# t = LinkedLIst()
+# t.add('проверка1')
+# t.add('проверка2')
 
-new = l + t
+# new = l + t
 # new.show()
 for m in l:
     print(m)
