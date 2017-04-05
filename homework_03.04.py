@@ -9,7 +9,8 @@ class Node(object):
 
 class LinkedLIst(object):
     def __init__(self, r=None):
-        self.root = r
+        self.last = r
+        self.root = None
         self.size = 0
         self.i = 0
 
@@ -53,7 +54,7 @@ class LinkedLIst(object):
             return self[i]
 
     def __contains__(self, item):
-        node = self.root
+        node = self.last
         while node:
             if node.data == item:
                 return True
@@ -74,10 +75,13 @@ class LinkedLIst(object):
     #     self.size += 1
 
     def add(self, d):
-        node = self.root
+        node = self.last
         new_node = Node(d)
-        node.next_node = new_node
-        self.root = new_node
+        if node:
+            node.next_node = new_node
+        self.last = new_node
+        if self.size == 0:
+            self.root = new_node
         self.size += 1
 
 
@@ -166,7 +170,8 @@ l.add(10)
 l.add('42')
 l.add('ололо')
 # print(len(l))
-# print(l[0])
+# l[1] = '1`31231231'
+# print(l[1])
 
 # print('ололо' in l)
 
@@ -175,6 +180,6 @@ l.add('ололо')
 # t.add('проверка2')
 
 # new = l + t
-# new.show()
-for m in l:
-    print(m)
+# l.show()
+# for m in l:
+#     print(m)
