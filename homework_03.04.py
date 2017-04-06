@@ -256,9 +256,7 @@ l.add('ололо')
 # print(len(l))
 # l[1] = '1`31231231'
 # print(l[1])
-
 # print('ололо' in l)
-#
 t = DoubleLinkedLIst()
 t.add('проверка1')
 t.add('проверка2')
@@ -269,7 +267,6 @@ t.add('ололо123123')
 # new = l + t
 # l.show()
 t.insert('добавление', 5)
-#
 # for m in t:
 #     print(m)
 t.show()
