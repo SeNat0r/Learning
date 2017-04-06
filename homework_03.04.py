@@ -1,6 +1,3 @@
-import copy
-
-
 class Node(object):
     """Создание ячейки с данными и ссылкой на следующую ячейку"""
     def __init__(self, d, n=None):
